@@ -9,7 +9,7 @@ using namespace std;
 class Node {
 public:
     int value;
-    Node *prev;
+    Node *next;
     Node *next;
 
     Node(int value) {
@@ -32,11 +32,11 @@ public:
         Node *newNode = new Node(value);
         newNode->next = nullptr;
         if (first == nullptr) {
-            newNode->prev = nullptr;
+            newNode->next = nullptr;
             first = newNode;
             last = newNode;
         }else {
-            newNode->prev = last;
+            newNode->next = last;
             last->next = newNode;
             last = newNode;
         }
@@ -50,10 +50,10 @@ public:
             for (int i = 0; i<index; i++) {
                 current = current->next;
             }
-            newNode->prev = current->prev;
             newNode->next = current->next;
-            current->prev->next = newNode;
-            current->next->prev = newNode;
+            newNode->next = current->next;
+            current->next->next = newNode;
+            current->next->next = newNode;
         }
         else if (index == 0) {
             insertAtStart(value);
@@ -72,9 +72,9 @@ public:
             first = newNode;
             last = newNode;
         }else {
-            newNode->prev = nullptr;
+            newNode->next = nullptr;
             newNode->next = first;
-            first->prev = newNode;
+            first->next = newNode;
             first = newNode;
         }
         size++;
@@ -88,7 +88,7 @@ public:
         } else {
             last->next = newNode;
             newNode->next = nullptr;
-            newNode->prev = last;
+            newNode->next = last;
             last = newNode;
         }
         size++;
@@ -108,17 +108,17 @@ public:
             for (int i = 0; i < index; i++) {
                 current = current->next;
             }
-            if (current->prev == nullptr) {
-                current->next->prev = nullptr;
+            if (current->next == nullptr) {
+                current->next->next = nullptr;
                 first = current->next;
             }else if (current->next == nullptr) {
-                current->prev->next = nullptr;
-                last = current->prev;
+                current->next->next = nullptr;
+                last = current->next;
             }else {
-                Node *prev = current->prev;
+                Node *prev = current->next;
                 Node *next = current->next;
                 prev->next = current->next;
-                next->prev = current->prev;
+                next->next = current->next;
             }
             size--;
             delete current;
@@ -133,7 +133,7 @@ public:
         if (size == 0) {
             return;
         }
-        last = last->prev;
+        last = last->next;
         delete last->next;
         last->next = nullptr;
         size--;
@@ -144,8 +144,8 @@ public:
             return;
         }
         this->first = this->first->next;
-        delete first->prev;
-        first->prev = nullptr;
+        delete first->next;
+        first->next = nullptr;
         size--;
     }
 
@@ -168,9 +168,9 @@ public:
     void displayBackward() {
         cout << "[";
         Node *current = last;
-        while (current->prev != nullptr) {
+        while (current->next != nullptr) {
             cout << current->value;
-            current = current->prev;
+            current = current->next;
             cout << " <- ";
         }
         cout << current->value << "]" << endl;
@@ -200,11 +200,11 @@ public:
         }else {
             Node *current = last;
             for (int i = 0; i < size; i++) {
-                Node *newNext = current->prev;
+                Node *newNext = current->next;
                 Node *newPrev = current->next;
 
                 current->next = newNext;
-                current->prev = newPrev;
+                current->next = newPrev;
                 current = newNext;
             }
             Node *temp = first;
