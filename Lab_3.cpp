@@ -10,7 +10,7 @@ class Node {
 public:
     int value;
     Node *next;
-    Node *next;
+    Node *prev;
 
     Node(int value) {
         this->value = value;
@@ -36,7 +36,7 @@ public:
             first = newNode;
             last = newNode;
         }else {
-            newNode->next = last;
+            newNode->prev = last;
             last->next = newNode;
             last = newNode;
         }
