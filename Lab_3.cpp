@@ -18,27 +18,27 @@ public:
 };
 
 class DoublyLinkedList {
-    Node *first;
-    Node *last;
+    Node *head;
+    Node *tail;
     int size;
 
 public:
     DoublyLinkedList() {
-        this->first = nullptr;
-        this->last = nullptr;
+        this->head = nullptr;
+        this->tail = nullptr;
         size = 0;
     }
     void insert(int value) {
         Node *newNode = new Node(value);
         newNode->next = nullptr;
-        if (first == nullptr) {
+        if (head == nullptr) {
             newNode->next = nullptr;
-            first = newNode;
-            last = newNode;
+            head = newNode;
+            tail = newNode;
         }else {
-            newNode->prev = last;
-            last->next = newNode;
-            last = newNode;
+            newNode->prev = tail;
+            tail->next = newNode;
+            tail = newNode;
         }
         size += 1;
     }
@@ -46,7 +46,7 @@ public:
     void insertAtIndex(int index, int value) {
         if (index > 0 && index < size) {
             Node *newNode = new Node(value);
-            Node *current = first;
+            Node *current = head;
             for (int i = 0; i<index; i++) {
                 current = current->next;
             }
@@ -68,28 +68,28 @@ public:
 
     void insertAtStart(int value) {
         Node *newNode = new Node(value);
-        if (first == nullptr) {
-            first = newNode;
-            last = newNode;
+        if (head == nullptr) {
+            head = newNode;
+            tail = newNode;
         }else {
             newNode->next = nullptr;
-            newNode->next = first;
-            first->next = newNode;
-            first = newNode;
+            newNode->next = head;
+            head->next = newNode;
+            head = newNode;
         }
         size++;
     }
 
     void insertAtLast(int value) {
         Node *newNode = new Node(value);
-        if (last == nullptr) {
-            first = newNode;
-            last = newNode;
+        if (tail == nullptr) {
+            head = newNode;
+            tail = newNode;
         } else {
-            last->next = newNode;
+            tail->next = newNode;
             newNode->next = nullptr;
-            newNode->next = last;
-            last = newNode;
+            newNode->next = tail;
+            tail = newNode;
         }
         size++;
     }
@@ -104,16 +104,16 @@ public:
 
     void deleteAtIndex(int index) {
         if (-1 < index && index < size) {
-            Node *current = first;
+            Node *current = head;
             for (int i = 0; i < index; i++) {
                 current = current->next;
             }
             if (current->next == nullptr) {
                 current->next->next = nullptr;
-                first = current->next;
+                head = current->next;
             }else if (current->next == nullptr) {
                 current->next->next = nullptr;
-                last = current->next;
+                tail = current->next;
             }else {
                 Node *prev = current->next;
                 Node *next = current->next;
@@ -133,9 +133,9 @@ public:
         if (size == 0) {
             return;
         }
-        last = last->next;
-        delete last->next;
-        last->next = nullptr;
+        tail = tail->next;
+        delete tail->next;
+        tail->next = nullptr;
         size--;
     }
 
@@ -143,16 +143,16 @@ public:
         if (size == 0) {
             return;
         }
-        this->first = this->first->next;
-        delete first->next;
-        first->next = nullptr;
+        this->head = this->head->next;
+        delete head->next;
+        head->next = nullptr;
         size--;
     }
 
     void display()
     {
         cout << "[";
-        Node *current = first;
+        Node *current = head;
         while (current->next != nullptr)
         {
             cout << current->value << " -> ";
@@ -167,7 +167,7 @@ public:
 
     void displayBackward() {
         cout << "[";
-        Node *current = last;
+        Node *current = tail;
         while (current->next != nullptr) {
             cout << current->value;
             current = current->next;
@@ -198,7 +198,7 @@ public:
         if (size == 0) {
             return;
         }else {
-            Node *current = last;
+            Node *current = tail;
             for (int i = 0; i < size; i++) {
                 Node *newNext = current->next;
                 Node *newPrev = current->next;
@@ -207,9 +207,9 @@ public:
                 current->next = newPrev;
                 current = newNext;
             }
-            Node *temp = first;
-            first = last;
-            last = temp;
+            Node *temp = head;
+            head = tail;
+            tail = temp;
         }
     }
 };

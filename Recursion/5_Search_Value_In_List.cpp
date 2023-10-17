@@ -1,5 +1,5 @@
 #include <iostream>
-#include "SinglyLinkedList.hpp"
+#include "LinkedList.hpp"
 using namespace std;
 
 int searchValue(Node* head, int value, int iteration = 0) {
@@ -14,15 +14,15 @@ int searchValue(Node* head, int value, int iteration = 0) {
 
 int main() {
 
-    SinglyLinkedList sll;
+    DoublyLinkedList ll;
     for (int i=0; i<10; i++) {
-        sll.insert(i);
+        ll.insert(i);
     }
 
-    cout << searchValue(sll.head, 12) << endl;
-    cout << searchValue(sll.head, 2) << endl;
-    cout << searchValue(sll.head, -6) << endl;
-    cout << searchValue(sll.head, 7) << endl;
+    cout << searchValue(ll.head, 12) << endl;
+    cout << searchValue(ll.head, 2) << endl;
+    cout << searchValue(ll.head, -6) << endl;
+    cout << searchValue(ll.head, 7) << endl;
 
 
 
