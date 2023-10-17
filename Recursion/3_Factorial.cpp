@@ -1,3 +1,6 @@
+// NAME: HAMMAD ZAFAR
+// ROLL NO : 2022-CS-639 (A)
+
 #include <iostream>
 using namespace std;
 
