@@ -132,9 +132,11 @@ public:
     }
 
     void sortAsceding() {
-        for (int i=0; i<size; i++) {
+        
+        Node *next = first->next;
+        while (next != nullptr) {
             Node *node = first;
-            for (int j = 1; j < (size - i); j++) {
+            while (node->next != nullptr) {
                 if (node->value > node->next->value) {
                     int temp = node->value;
                     node->value = node->next->value;
@@ -142,6 +144,7 @@ public:
                 }
                 node = node->next;
             }
+            next = next->next;
         }
     }
     void sortDeasceding()
@@ -191,12 +194,12 @@ int main()
     LinkedList ll;
 
     ll.insertAtEnd(1);
-    ll.insertAtEnd(2);
     ll.insertAtEnd(3);
+    ll.insertAtEnd(5);
     ll.insertAtEnd(4);
 
-    cout << "Reversing " << endl;
-    ll.reverse();
+    ll.sortAsceding();
+
     ll.display();
 
     return 0;
