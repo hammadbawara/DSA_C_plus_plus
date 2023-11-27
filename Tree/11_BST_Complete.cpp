@@ -160,6 +160,10 @@ void printInOrder(Node *node, int depth) {
         printInOrder(node->right, depth + 1);
     }
 
+int function(int hello) {
+    return hello;
+}
+
 
 
 int main() {
@@ -209,6 +213,5 @@ int main() {
     Node* root = myStack.top();
     
     printInOrder(root, 0);
-
     return 0;
 }
